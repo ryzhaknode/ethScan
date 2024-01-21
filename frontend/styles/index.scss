@@ -1,0 +1,28 @@
+@import "./global";
+@import "calendar";
+@import "./animation";
+@import "./toZero";
+@import "./loader";
+@font-face {
+  font-family: 'e-Ukraine';
+  src: url('../public/fonts/e-Ukraine-Bold.otf') format('otf'),
+  url('../public/fonts/e-Ukraine-Medium.otf') format('otf'),
+  url('../public/fonts/e-Ukraine-Regular.otf') format('otf'),
+  url('../public/fonts/e-Ukraine-Thin.otf') format('otf'),
+  url('../public/fonts/e-Ukraine-UltraLight.otf') format('otf'),
+  url('../public/fonts/e-Ukraine-Light.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family:  'e-Ukraine';
+  box-sizing: border-box;
+  //-webkit-font-smoothing: antialiased;
+  //-moz-osx-font-smoothing: grayscale;
+  background-color: #F5F5F5;
+}
+
+*{
+  //box-sizing: border-box;
+}
+

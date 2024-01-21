@@ -1,0 +1,125 @@
+.PopupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(20, 20, 20, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+  &__popup {
+    position: relative;
+    background-color: #FFFFFF;
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+
+    &__container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    &__img {
+      background-color: #FFFBED;
+      height: 74px;
+      width: 74px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 60px
+    }
+
+    &__children{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-width: 420px;
+    }
+
+    &__closeBtn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 24px;
+      height: 24px;
+      transition: opacity 0.2s ;
+      opacity: 0.5;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+
+      &:hover{
+        opacity: 1;
+      }
+
+      &:after{
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 15px;
+        width: 2px;
+        background-color: #ADB5BD;
+
+        transform: rotate(-45deg);
+      }
+
+      &:before{
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 15px;
+        width: 2px;
+        background-color: #ADB5BD;
+
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  &__btnContainer{
+
+    //button{
+    //  margin: 10px;
+    //}
+  }
+
+
+
+}
+
+
+.containerImage {
+  //padding: 0 160px;
+
+  //@media (max-width: 1240px) {
+  //  padding: 0 130px;
+  //}
+  //
+  //@media (max-width: 1024px) {
+  //  padding: 0 100px;
+  //}
+  //
+  //@media (max-width: 768px) {
+  //  padding: 0 70px;
+  //}
+
+  &__img {
+    background-color: #FFFBED;
+    height: 74px;
+    width: 74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 60px
+  }
+
+}

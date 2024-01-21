@@ -1,0 +1,30 @@
+.InvoiceItem{
+  display: flex;
+  justify-content: space-between;
+  padding: 33px 20px;
+  border-bottom: 1px solid #CED4DA
+;
+
+  &__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 1 90%;
+    gap: 10px;
+  }
+
+
+  &__item{
+    flex: 0 0 18%;
+    color: #141414;
+    font-size: 14px;
+  }
+
+  &__img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    width: 24px;
+  }
+}

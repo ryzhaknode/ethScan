@@ -1,0 +1,26 @@
+
+.PassportUpload{
+
+  &__loaded{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &__empty{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &:hover{
+      svg path{
+        transition: ease 0.2s;
+        stroke: #FFC404;
+      }
+      p{
+        transition: ease 0.2s;
+        color: #FFC404;
+      }
+    }
+  }
+}

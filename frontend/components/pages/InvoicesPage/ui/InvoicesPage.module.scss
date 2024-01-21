@@ -1,0 +1,159 @@
+
+.InvoicesPage {
+  box-sizing: border-box;
+  padding-top: 20px;
+
+  height: 100%;
+
+
+  &__container {
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+    padding: 20px;
+    height: 100%;
+
+  }
+}
+
+.searchBlock {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 18px;
+
+
+  &__inputBlock {
+    display: flex;
+    flex: 0 0 30%;
+    justify-content: center;
+    gap: 6px;
+
+    &__input {
+      min-width: 100px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border: 1px solid #FFC404;
+      }
+    }
+
+    &__answer {
+      position: relative;
+    }
+
+    &__answerBlock {
+      transition: all 0.3s ease;
+      opacity: 0;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.12);
+      position: absolute;
+      top: -100px;
+      left: -125px;
+      width: 264px;
+      height: 88px;
+      background-color: #FFFFFF;
+    }
+
+    &__answerBlock::after {
+
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #FFFFFF;
+    }
+
+    &__img {
+      width: 24px;
+      height: 24px;
+
+      &:hover > path{
+        transition: all 0.3s ease;
+        stroke: #FFC404;
+      }
+    }
+
+  }
+
+  &__calendarBlock {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 27.5%;
+    gap: 10px;
+    align-items: end;
+
+    &__container {
+      width: 100%;
+      position: relative;
+    }
+
+    &__calendar {
+      transition: all 0.3s ease;
+
+      &:hover {
+        border: 1px solid #FFC404;
+      }
+    }
+
+
+
+
+    &__clear {
+      cursor: pointer;
+
+    }
+  }
+
+
+}
+
+
+.headerInvoices {
+  background-color: #FAFAFA;
+  border-radius: 6px;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 23px 20px;
+
+  }
+
+
+  &__dataTabs {
+    display: flex;
+    justify-content: space-between;
+    flex: 0 1 90%;
+    gap: 10px;
+
+
+    &__tab {
+      flex: 0 0 18%;
+      color: #6A7178;
+      font-size: 14px;
+    }
+  }
+
+
+  &__pdf {
+    color: #6A7178;
+    font-size: 14px;
+
+  }
+}
+
+.Invoices {
+  height: 50vh;
+  overflow: scroll;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #CED4DA;
+
+}
+
+.searchBlock__inputBlock__img:hover + .searchBlock__inputBlock__answerBlock {
+  opacity: 1;
+}

@@ -1,0 +1,82 @@
+.AuthPage {
+  flex-grow: 1;
+  padding: 20px 10px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image {
+  max-width: 100%;
+  height: 100%; //was auto
+  border-radius: 20px;
+
+  @media (max-width: 1240px) {
+    display: none;
+  }
+}
+
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 120px;
+  gap: 20px;
+  max-width: 100%;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 80px 30px;
+    gap: 20px;
+
+    @media (max-width: 768px) {
+      padding: 40px 15px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+
+  }
+
+  &__navigations {
+    display: flex;
+    flex-direction: column;
+    padding: 0 90px;
+    max-width: 240px;
+
+    @media (max-width: 1240px) {
+      padding: 0 70px;
+    }
+
+    @media (max-width: 1024px) {
+      padding: 0 50px;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0 20px;
+    }
+
+  }
+
+  &__smsBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px 0 40px;
+
+  }
+}
+

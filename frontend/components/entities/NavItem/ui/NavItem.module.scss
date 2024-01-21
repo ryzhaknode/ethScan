@@ -1,0 +1,45 @@
+.NavItem {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  width: 100%;
+  max-height: 56px;
+  border-radius: 6px;
+
+  &__container {
+    padding: 16px 14px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    transition: all 0.3s ease;
+
+    &:hover{
+      .NavItem__container__icon > svg > path{
+        transition: all 0.3s ease;
+        stroke: #FFC404;
+      }
+
+      .NavItem__container__title{
+        transition: all 0.3s ease;
+        color: #FFC404;;
+      }
+    }
+
+    &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: 8px;
+      cursor: pointer;
+
+    }
+
+
+
+    &__title {
+      cursor: pointer;
+
+    }
+  }
+}

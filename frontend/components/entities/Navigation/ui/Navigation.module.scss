@@ -1,0 +1,42 @@
+.Navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+
+
+  &__text {
+  }
+
+}
+
+.NavBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+
+  &__number {
+
+  }
+
+  &__arrowBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    &__arr_left {
+      cursor: pointer;
+      transform: rotate(90deg);
+      //stroke: red;
+    }
+
+
+    &__arr_right {
+      cursor: pointer;
+      transform: rotate(-90deg);
+    }
+  }
+}

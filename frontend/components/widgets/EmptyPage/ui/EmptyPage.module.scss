@@ -1,0 +1,28 @@
+.EmptyPage {
+  padding-top: 20px;
+  height: 100%;
+  &__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+
+    height: 100%;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+
+  &__img {
+    max-width: 152px;
+    max-height: 140px;
+  }
+
+
+}

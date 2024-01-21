@@ -1,0 +1,25 @@
+.DriverItem{
+  display: flex;
+  justify-content: space-between;
+  padding: 33px 20px;
+  border-bottom: 1px solid #CED4DA;
+  transition: 0.3s ease;
+  &:hover{
+    background-color: #FFFDF4;
+  }
+
+  &__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 0 1 90%;
+    gap: 10px;
+  }
+
+
+  &__item{
+    flex: 0 0 15%;
+    color: #141414;
+    font-size: 14px;
+  }
+}

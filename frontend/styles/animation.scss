@@ -1,0 +1,86 @@
+
+//logout
+
+.arrow_open {
+  rotate: 180deg;
+}
+
+.exit_open {
+  opacity: 1 !important;
+  cursor: pointer !important;
+}
+
+//navigation tabs
+.active_tab > svg > path {
+  stroke: #FFC404;
+}
+
+.active_tab {
+  color: #FFC404;
+  background-color: #FFFBED;
+}
+
+
+//calendar
+.calendar_open {
+  display: block;
+}
+
+.open_inputCalendar{
+  transition: all 0.3s ease;
+  border: 1px solid #FFC404;
+}
+
+.open_inputCalendar > div > svg > path{
+  transition: all 0.3s ease;
+  stroke: #FFC404;
+}
+
+.active_input{
+  border: 1px solid #FFC404;
+}
+
+//chooseCalendar
+.calendar_positionTop{
+  top: -415%;
+}
+//Trailertem
+
+.selectedDone{
+  background-color: #00D689!important;
+}
+
+.selectedRejected{
+  background-color: #FF3E3E!important;
+}
+
+.waitingBill{
+  background-color: #FFC404!important;
+}
+
+//displayNone for anyone
+.displayNone{
+  display: none!important;
+}
+
+//section tabs
+
+.open_tabs{
+  transition: 0.2s ease;
+  border: 1px solid #FFC404;
+}
+
+.open_tabs > div > svg > path{
+  transition: 0.2s ease;
+  stroke: #FFC404;
+}
+
+.open_tabs > div > svg{
+  transition: 0.2s ease;
+  transform: rotate(180deg);
+}
+
+.selected_tab{
+  background-color: #FFFBED;
+  color: #FFC404;
+}

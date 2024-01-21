@@ -1,0 +1,41 @@
+.LdsSpinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+
+  div {
+    transform-origin: 10px 10px;
+    animation: lds-spinner 1.2s linear infinite;
+
+    &:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 1px;
+      left: 9px;
+      width: 2px;
+      height: 5px;
+      border-radius: 20%;
+      background: #BBC2C8;
+    }
+
+    @for $i from 1 through 10 { // Змінено з 12 до 10
+      &:nth-child(#{$i}) {
+        transform: rotate(36deg * ($i - 1)); // Кожен елемент повертається на 36 градусів
+        animation-delay: -0.12s * ($i - 1); // Оновлено для 10 елементів
+      }
+    }
+  }
+}
+
+@keyframes lds-spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
