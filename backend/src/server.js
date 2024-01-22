@@ -3,13 +3,25 @@ import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
 import {router} from "../routes/routes.js";
 import mongoose from "mongoose";
+import {connectDB} from "./db.js";
 
-const PORT = process.env.PORT || 3001;
-const URL = "mongodb+srv://ryzhaknode:Ryz16091999@cluster0.c5pwidp.mongodb.net/";
+const PORT = process.env.PORT || 5001;
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
+
+connectDB()
+
+// mongoose.connect('your_connection_string', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     // інші опції за потреби
+// }).then(() => {
+//     console.log('MongoDB connected');
+// }).catch((error) => {
+//     console.error('MongoDB connection failed:', error.message);
+// });
 
 const csrfProtection = csrf({cookie: true});
 app.get('/sanctum/csrf-cookie', csrfProtection, (req, res) => {
