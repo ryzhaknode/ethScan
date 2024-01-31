@@ -1,9 +1,11 @@
 import cls from './NavBar.module.scss';
 import {Box} from "@mui/material";
-import NavItem from "../../../entities/NavItem/ui/NavItem";
+// import NavItem from "../../../entities/NavItem/ui/NavItem";
 import {classNames} from "../../../shared/lib/classNames";
-import {navItemList} from "../../../shared/config/NavItemList";
+// import {navItemList} from "../../../shared/config/NavItemList";
 import {useState} from "react";
+import NavItem from "../../../entities/NavItem/ui/NavItem";
+import {navItemList} from "../../../shared/config/NavItemList";
 
 
 interface NavBarProps {
@@ -20,7 +22,7 @@ const NavBar = ({className}: NavBarProps) => {
             </Box>
             <Box className={cls.Nav}>
                 <Box className={cls.Nav__menu}>
-                    {navItemList.map(({title, icon, url}) => <NavItem url={url} key={title} svgIcon={icon}>{title}</NavItem>)}
+                    {navItemList.map(({title, imageSrc, url}) => <NavItem url={url} key={title} imageSrc={imageSrc}>{title}</NavItem>)}
                 </Box>
 
             </Box>

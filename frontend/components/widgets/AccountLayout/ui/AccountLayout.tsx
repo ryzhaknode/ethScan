@@ -5,9 +5,7 @@ import {Box, Container} from "@mui/material";
 import NavBar from "../../NavBar/ui/NavBar";
 import Header from "../../Header/ui/Header";
 import {useRouter} from "next/router";
-import {useSelector} from "react-redux";
-import {getUserInfo} from "../../../app/redux/slices/selectors/addUserInfoSelectors";
-import useUserData from "../../../shared/hooks/requestHooks/useUserData";
+
 
 interface AccountLayoutProps {
     className?: string;
@@ -15,9 +13,9 @@ interface AccountLayoutProps {
 }
 
 const AccountLayout = ({className, children}: AccountLayoutProps) => {
-    useUserData()
+    // useUserData()
     const router = useRouter();
-    const userInfo = useSelector(getUserInfo)
+    // const userInfo = useSelector(getUserInfo)
 
     //змінюю backgroudcolor для сторінки /account
     useEffect(() => {
@@ -34,7 +32,7 @@ const AccountLayout = ({className, children}: AccountLayoutProps) => {
             <Box className={classNames(cls.AccountLayout, {}, [className])}>
                 <NavBar/>
                 <Box className={cls.MainBlock}>
-                    <Header name={userInfo.name}/>
+                    <Header />
                     {children}
                 </Box>
             </Box>

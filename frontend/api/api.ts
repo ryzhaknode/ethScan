@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "http://localhost:3001";
+export const baseUrl = "http://localhost:5001";
 
 
 export const getData = async (url: string) => {
@@ -24,7 +24,7 @@ export const postData = async (url:string, post:object, formData = false) => {
             headers: {
                 "Content-Type": formData ? "multipart/form-data" : "application/json",
             },
-            withCredentials: true,
+            // withCredentials: true,
         });
         return response;
     } catch (error: any) {
@@ -79,5 +79,5 @@ export const deleteData = async (url: string, post: object) => {
     }
 };
 
-axios.defaults.withCredentials = true;
-axios.defaults.withXSRFToken = true;
+// axios.defaults.withCredentials = true;
+// axios.defaults.withXSRFToken = true;

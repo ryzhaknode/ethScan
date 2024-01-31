@@ -15,9 +15,6 @@ export default function App({Component, pageProps}: AppProps) {
     const router = useRouter();
     const isAccount = router.pathname.includes('/account');
 
-    useEffect(() => {
-        if (Boolean(!cookies["XSRF-TOKEN"])) getData("/sanctum/csrf-cookie").then(() => {})
-    }, []);
 
     return (
         <CookiesProvider>

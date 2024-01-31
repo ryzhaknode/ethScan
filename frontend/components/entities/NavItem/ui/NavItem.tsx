@@ -8,12 +8,12 @@ import {useRouter} from "next/router";
 interface NavItemProps {
     className?: string;
     children: ReactNode;
-    svgIcon: ReactNode;
+    imageSrc: string;
     url: string;
 
 }
 
-const NavItem = ({className, children, svgIcon, url}: NavItemProps) => {
+const NavItem = ({className, children, imageSrc, url}: NavItemProps) => {
     const [activeBar, setActiveBar ] = useState(false)
     const router = useRouter()
 
@@ -26,7 +26,7 @@ const NavItem = ({className, children, svgIcon, url}: NavItemProps) => {
             <Box className={cls.NavItem__container}>
                 <Box height='24px' width='24px'
                      className={classNames(cls.NavItem__container__icon, {active_tab: activeBar})}>
-                    {svgIcon}
+                    <img src={imageSrc}/>
                 </Box>
                 <Link style={{textDecoration: 'none'}} href={url}>
                     <Typography variant='h3' fontWeight='400'

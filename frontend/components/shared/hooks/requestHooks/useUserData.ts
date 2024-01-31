@@ -2,8 +2,8 @@ import {useEffect} from 'react';
 import {getData} from "../../../../api/api";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserInfo} from "../../../app/redux/slices/selectors/addUserInfoSelectors";
-import {addUserInfo} from "../../../app/redux/slices/addNameSlice";
+import {getUserInfo} from "../../../app/redux/slices/selectors/addWalletInfoSelectors";
+import {addUserInfo} from "../../../app/redux/slices/addWalletSlice";
 
 const requestUrl = {
     user: '/front/profile/user'

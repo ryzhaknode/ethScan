@@ -11,9 +11,11 @@ import {getData, postData} from "../../api/api";
 import {useRouter} from "next/router";
 import useCountdownTimer from "../../components/shared/hooks/useCountdownTimer";
 import MyLoading from "../../components/shared/ui/MyLoading/MyLoading";
-import {useSelector} from "react-redux";
-import {getUserInfo} from "../../components/app/redux/slices/selectors/addUserInfoSelectors";
+import {useDispatch, useSelector} from "react-redux";
 import useUserData from "../../components/shared/hooks/requestHooks/useUserData";
+import {getPopupState} from "../../components/app/redux/slices/selectors/openPopupSelectors";
+import {hidePopup, showPopup} from "../../components/app/redux/slices/openPopupSlice";
+import SuccessPopup from "../../components/widgets/SuccessPopup/SuccessPopup";
 
 interface AuthPageProps {
     className?: string;
@@ -31,8 +33,8 @@ function validateInput(inputValue: string) {
 }
 
 const requestPath = {
-    getOtp: '/front/auth/get-otp',
-    checkOtp: '/front/auth/check-otp',
+    getOtp: '/send-password',
+    checkOtp: '/auth',
     getPhoneOtp: '/front/auth/get-otp-phone',
     checkPhoneOtp: '/front/auth/check-otp-phone'
 
@@ -41,7 +43,10 @@ const requestPath = {
 
 const AuthPage = ({className}: AuthPageProps) => {
     useUserData()
-    const userData = useSelector(getUserInfo)
+    // const userData = useSelector(getUserInfo)
+    const showModal = useSelector(getPopupState);
+    const dispatch = useDispatch();
+
     const router = useRouter();
     const [selectedTab, setSelectedTab] = useState(0)
     const [inputValue, setInputValue] = useState('')
@@ -53,10 +58,16 @@ const AuthPage = ({className}: AuthPageProps) => {
         input: '',
         password: '',
     })
-    const [timerForOneMin, startTimerForOneMin] = useCountdownTimer(59)
-    const [timerForTenMin, startTimerForTenMin] = useCountdownTimer(599)
+    const [timerForOneMin, startTimerForOneMin] = useCountdownTimer(0)
+    const [timerForTenMin, startTimerForTenMin] = useCountdownTimer(0)
 
-    console.log(userData)
+    const [popupText, setPopupText ] = useState("")
+
+    function closeDeletePopup() {
+        dispatch(hidePopup());
+    };
+
+
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
         setSelectedTab(newValue);
         clearInputs()
@@ -77,9 +88,7 @@ const AuthPage = ({className}: AuthPageProps) => {
 
 
     const handleBtnClick = async () => {
-        console.log('handleBtnClick')
 
-        console.log(inputValue)
         if (inputValue.length < 1) {
             return
         }
@@ -87,33 +96,29 @@ const AuthPage = ({className}: AuthPageProps) => {
         if (!selectedTab) {
             setIsLoading(true)
             clearError()
+
             const res: any = await postData(requestPath.getOtp, {
-                "email": inputValue
+                "mail": inputValue
             })
             setIsLoading(false)
 
-            if (res?.status === 204) {
+            console.log(res)
+            if (res?.status === 200) {
+                dispatch(showPopup())
+                setPopupText(res?.data)
                 setIsValueConfirm(true)
                 clearError()
                 startTimerForOneMin()
             }
 
-            console.log(res)
-            if (res?.response?.status === 419) {
-                const res = await getData("/sanctum/csrf-cookie")
-                handleBtnClick()
-                console.log(res)
-                // setError429(true);
-                // startTimerForTenMin();
-            }
+            if (res?.request?.status === 0) {
 
-
-            if (res?.message) {
                 setAuthError(prevState => ({
                     ...prevState,
-                    input: res?.response?.data.message
+                    input: 'Server connection error'
                 }))
             }
+
         } else {
             if (validateInput(inputValue)) {
 
@@ -171,8 +176,8 @@ const AuthPage = ({className}: AuthPageProps) => {
             if (!selectedTab) {
                 console.log('checkOtp')
                 const res: any = await postData(requestPath.checkOtp, {
-                    "email": inputValue,
-                    otp
+                    "mail": inputValue,
+                    "password": otp
                 })
 
                 if (res?.response?.status === 429) {
@@ -181,7 +186,7 @@ const AuthPage = ({className}: AuthPageProps) => {
                     startTimerForTenMin()
                 }
 
-                if (res?.status === 204) {
+                if (res?.status === 200) {
                     clearError()
                     router.push('/account')
                     // clearInputs()
@@ -233,14 +238,9 @@ const AuthPage = ({className}: AuthPageProps) => {
         setPassword(['', '', '', '', '', ''])
     }
 
-    useEffect(() => {
-        if (Boolean(userData.name)) router.push('/account')
-    }, [userData])
-
 
     const handleEnterPress = (event: KeyboardEvent) => {
         if (event.key === 'Enter') {
-            console.log('Enter was pressed. Code executes here.');
             handleBtnClick();
         }
     };
@@ -252,6 +252,7 @@ const AuthPage = ({className}: AuthPageProps) => {
             window.removeEventListener('keydown', handleEnterPress);
         };
     }, [inputValue]);
+
 
     return (
         <Box className={classNames(cls.AuthPage, {}, [className])}>
@@ -348,6 +349,7 @@ const AuthPage = ({className}: AuthPageProps) => {
                         входу</Typography>}
             </Box>
 
+            <SuccessPopup show={showModal} onClose={closeDeletePopup}>{popupText}</SuccessPopup>
         </Box>
     );
 };

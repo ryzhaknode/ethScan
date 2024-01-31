@@ -1,10 +1,10 @@
 import {configureStore} from "@reduxjs/toolkit";
-import addUserInfoReducer from '../slices/addNameSlice'
+import addWalletInfoReducer from '../slices/addWalletSlice'
 import openPopupReducer from '../slices/openPopupSlice'
 
 export const store = configureStore(({
     reducer: {
-        addUserInfo: addUserInfoReducer,
+        addWalletInfo: addWalletInfoReducer,
         openPopup: openPopupReducer,
     },
 }))

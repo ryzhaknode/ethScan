@@ -1,8 +1,9 @@
-export const binanceWallets = [
-    "0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72",
-    "0x5a52E96BAcdaBb82fd05763E25335261B270Efcb",
-    "0x28C6c06298d514Db089934071355E5743bf21d60",
-    "0x21a31Ee1afC51d94C2eFcCAa2092aD1028285549",
-    "0xDFd5293D8e347dFe59E90eFd55b2956a1343963d",
-    "0x9696f59E4d72E237BE84fFD425DCaD154Bf96976"
-]
+import nodemailer from "nodemailer"
+
+export const transporter = nodemailer.createTransport({
+    service: 'gmail', // або інший email провайдер
+    auth: {
+        user: 'ivanrigak@gmail.com',
+        pass: 'Den1609!'
+    }
+});

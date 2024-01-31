@@ -14,7 +14,9 @@ interface SuccessPopupProps {
 const SuccessPopup = ({className, show, onClose, children}: SuccessPopupProps) => {
     useEffect(() => {
         if (show) {
+            console.log('closeDeletePopup')
             const timer = setTimeout(() => {
+                console.log('done')
                 onClose();
             }, 1500);
 

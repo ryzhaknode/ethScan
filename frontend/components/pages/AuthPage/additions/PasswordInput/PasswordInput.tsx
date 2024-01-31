@@ -12,7 +12,6 @@ interface PasswordInputProps {
 
 const PasswordInput = ({password, setPassword, error}: PasswordInputProps) => {
 
-    console.log(password)
 
     const inputRefs = useRef(Array(6).fill(null).map(() => React.createRef()));
 
