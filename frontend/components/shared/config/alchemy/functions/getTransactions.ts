@@ -34,18 +34,22 @@ export const getLastTransfer = async (adress: string) => {
 
 export const getAllTransfer = async (adress: string) => {
     try {
-        const getTransfers = alchemy.core.getAssetTransfers({
+        const getTransfers = await alchemy.core.getAssetTransfers({
             fromBlock: "0x0",
-            toBlock: "latest",
-            contractAddresses: [adress],
+            // toBlock: "latest",
+            fromAddress: adress,
+            // contractAddresses: [adress],
             excludeZeroValue: true,
             // @ts-ignore
-            category: ["internal"],
+            category: ["erc20"],
         });
-        const firstPage = await getTransfers;
-        const firstPageLength = firstPage.transfers.length;
-        if (firstPageLength > 0) {
-            return  firstPageLength
+
+        const {transfers} = getTransfers;
+        if (transfers.length > 0) {
+            return transfers.sort(
+                (a, b) => parseInt(b.blockNum, 16) - parseInt(a.blockNum, 16)
+            )
+
         } else {
             console.log("No transfers found on the first page.");
             return null;

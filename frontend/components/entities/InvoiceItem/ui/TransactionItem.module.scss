@@ -1,4 +1,4 @@
-.InvoiceItem{
+.TransactionItem{
   display: flex;
   justify-content: space-between;
   padding: 33px 20px;
@@ -15,7 +15,7 @@
 
 
   &__item{
-    flex: 0 0 18%;
+    flex: 1 1 15%;
     color: #141414;
     font-size: 14px;
   }

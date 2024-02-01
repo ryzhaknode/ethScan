@@ -13,13 +13,14 @@ import ZeroItems from "../../components/entities/ZeroItems/ui/ZeroItems";
 import ClearIcon from '@mui/icons-material/Clear';
 import MyLoading from "../../components/shared/ui/MyLoading/MyLoading";
 import EmptyPage from "../../components/widgets/EmptyPage/ui/EmptyPage";
-import InvoiceItem from "../../components/entities/InvoiceItem/ui/InvoiceItem";
 import {getAllTransfer} from "../../components/shared/config/alchemy/functions/getTransactions";
+import TransactionItem from "../../components/entities/InvoiceItem/ui/TransactionItem";
+import {AssetTransfersWithMetadataResult} from "alchemy-sdk";
 
 
-const tabTitles: string[] = ['№', 'Дата', 'Паливо', 'Об’єм (л)', 'Сумма (грн)'];
+const tabTitles: string[] = ['Hash', 'From', 'Asset', 'Value', 'To'];
 
-const InvoicesPage = () => {
+const TransactionsPage = () => {
     // const [invoiceData, fetchInvoiceData] = useInvoiceData();
     const [isCalendarOpen, setIsCalendarOpen] = useState(false);
     const [page, setPage] = useState<number>(1);
@@ -33,23 +34,25 @@ const InvoicesPage = () => {
     const trottlingHandle = useThrottlingProtect();
     const calendarRef = useRef();
     const isFirstRender = useRef(true);
+    const [transactions, setTransactions] = useState<AssetTransfersWithMetadataResult[] | null>(null)
     const inputByNumberFilter = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const {value} = e.target
 
-        const result = await getAllTransfer(value)
-
-        console.log(result)
+        //
+        // console.log(result)
 
         setInputFilterByName(value)
 
-        trottlingHandle(() => {
-            setFilters(prev => ({
-                ...prev,
-                "likeNumber": value
-            }));
+        trottlingHandle(async () => {
+            const result = await getAllTransfer(value)
+            setTransactions(result)
         }, 300);
     };
 
+
+    useEffect(() => {
+        console.log(transactions)
+    }, [transactions])
 
     const setTimeFilter = (from: string | null, to: string | null) => {
         setFilters(prev => ({
@@ -96,11 +99,7 @@ const InvoicesPage = () => {
 
     const handleClearInput = () => {
         setInputFilterByName('')
-
-        setFilters(prev => ({
-            ...prev,
-            likeNumber: null
-        }));
+        setTransactions(null)
     };
 
 
@@ -202,13 +201,22 @@ const InvoicesPage = () => {
                 </Box>
 
                 {/*Накладна*/}
-                <Box className={cls.Invoices}>
-                    {/*{invoiceData?.meta?.total ?*/}
-                    {/*    invoiceData?.data.map(invoice => (*/}
-                    {/*        <InvoiceItem key={invoice.id} invoice={invoice}/>*/}
-                    {/*    ))*/}
-                    {/*    : <ZeroItems/>*/}
-                    {/*}*/}
+                <Box className={cls.Transactions}>
+
+                    {transactions === null
+                        ?
+                        <ZeroItems/>
+                        :
+                        transactions.map((ts, index) => (
+                            <TransactionItem key={index} transaction={ts}/>
+                        ))
+                    }
+
+                    {/*<TransactionItem transaction={transactions}/>*/}
+
+                    {/*{transactions?.map((ts, index) => (*/}
+                    {/*    <TransactionItem key={index} transaction={ts}/>*/}
+                    {/*))}*/}
                 </Box>
             </Box>
         </Box>
@@ -216,4 +224,4 @@ const InvoicesPage = () => {
     );
 };
 
-export default InvoicesPage;
+export default TransactionsPage;

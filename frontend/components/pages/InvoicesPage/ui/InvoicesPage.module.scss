@@ -130,7 +130,7 @@
 
 
     &__tab {
-      flex: 0 0 18%;
+      flex: 1 1 15%;
       color: #6A7178;
       font-size: 14px;
     }
@@ -144,7 +144,7 @@
   }
 }
 
-.Invoices {
+.Transactions {
   height: 50vh;
   overflow: scroll;
   padding-bottom: 20px;
