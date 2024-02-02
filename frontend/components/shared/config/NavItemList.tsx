@@ -7,6 +7,11 @@ interface itemValues {
 
 export const navItemList: itemValues[] = [
     {
+        title: 'Portfolio',
+        imageSrc:'/images/icons/TTH.svg',
+        url: '/account/portfolio'
+    },
+    {
         title: 'Transactions',
         imageSrc:'/images/icons/Bills.svg',
         url: '/account/transactions'
@@ -16,20 +21,5 @@ export const navItemList: itemValues[] = [
         imageSrc:'/images/icons/Invoices.svg',
         url: '/account/ethscan'
     },
-    // {
-    //     title: 'ТТН',
-    //     imageSrc:'/images/icons/TTH.svg',
-    //     url: '/account/ttn'
-    // },
-    // {
-    //     title: 'Причепи',
-    //     imageSrc:'/images/icons/Trailer.svg',
-    //     url: '/account/trailer'
-    // },
-    // {
-    //     title: 'Водії',
-    //     imageSrc:'/images/icons/Drivers.svg',
-    //     url: '/account/driver'
-    // },
 
 ]

@@ -1,5 +1,5 @@
 
-.BillsPage {
+.PortfolioPage {
   box-sizing: border-box;
   padding-top: 20px;
 
@@ -24,7 +24,7 @@
 
   &__inputBlock {
     display: flex;
-    flex: 0 0 30%;
+    flex: 0 0 50%;
     justify-content: center;
     gap: 6px;
 
@@ -71,7 +71,7 @@
       width: 24px;
       height: 24px;
 
-      &:hover > path{
+      &:hover > path {
         transition: all 0.3s ease;
         stroke: #FFC404;
       }
@@ -82,7 +82,7 @@
   &__calendarBlock {
     display: flex;
     flex-direction: column;
-    flex: 0 0 50%;
+    flex: 0 0 27.5%;
     gap: 10px;
     align-items: end;
 
@@ -100,37 +100,6 @@
     }
 
 
-
-
-    &__clear {
-      cursor: pointer;
-
-    }
-  }
-
-  &__baseTabs {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 50%;
-    gap: 10px;
-    align-items: end;
-
-    &__container {
-      width: 100%;
-      position: relative;
-    }
-
-    &__tabsInput {
-      transition: all 0.3s ease;
-
-      &:hover {
-        border: 1px solid #FFC404;
-      }
-    }
-
-
-
-
     &__clear {
       cursor: pointer;
 
@@ -146,36 +115,23 @@
   border-radius: 6px;
 
   &__container {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     padding: 23px 20px;
 
   }
 
-  &__dataTabs1 {
+
+  &__dataTabs {
     display: flex;
     justify-content: space-between;
-    flex: 0 1 45%;
+    flex: 0 1 75%;
     gap: 10px;
 
 
     &__tab {
-      flex: 1 1 15%;
-      color: #6A7178;
-      font-size: 14px;
-    }
-  }
-
-
-  &__dataTabs2 {
-    display: flex;
-    justify-content: space-between;
-    flex: 0 1 45%;
-    gap: 10px;
-
-
-    &__tab {
-      flex: 1 1 14%;
+      flex: 1 1 25%;
       color: #6A7178;
       font-size: 14px;
     }
@@ -189,9 +145,13 @@
   }
 }
 
-.Invoices {
-  height: 50vh;
+.TokenBalances {
+  //flex: auto;
+
+  height: 80%;
+
   overflow: scroll;
+
   padding-bottom: 20px;
   border-bottom: 1px solid #CED4DA;
 
@@ -199,34 +159,4 @@
 
 .searchBlock__inputBlock__img:hover + .searchBlock__inputBlock__answerBlock {
   opacity: 1;
-}
-
-
-
-.Tabs{
-  transition: 0.3s ease;
-  position: absolute;
-  top: 120%;
-  z-index: 10;
-  left: 0;
-  width: 100%;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.12);
-  background-color: #FFFFFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  max-height: 350px;
-  overflow: auto;
-
-  &__tab{
-    cursor: pointer;
-    border-radius: 4px;
-    margin: 6px;
-    //padding: 18px 16px;
-    padding: 16px 14px;
-    transition: 0.3s ease;
-    &:hover{
-      color: #FFC404;
-    }
-  }
 }

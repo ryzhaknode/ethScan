@@ -12,8 +12,7 @@ const ZeroItems = ({className}: ZeroItemsProps) => {
             <Box className={cls.ZeroItems__box}>
                 <img className={cls.ZeroItems__img} src='/images/ZeroItems.png'/>
                 <Typography textAlign='center' maxWidth='300px' variant='body1' fontSize='22px'
-                            lineHeight='26.4px'>За вашими параметрами фільтра
-                    нічого не знайдено :(</Typography>
+                            lineHeight='26.4px'>Empty :(</Typography>
             </Box>
         </Box>
     );

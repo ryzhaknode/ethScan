@@ -1,5 +1,5 @@
 
-.InvoicesPage {
+.EthScanPage {
   box-sizing: border-box;
   padding-top: 20px;
 
@@ -115,6 +115,7 @@
   border-radius: 6px;
 
   &__container {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     padding: 23px 20px;
@@ -130,7 +131,7 @@
 
 
     &__tab {
-      flex: 1 1 15%;
+      flex: 1 1 20%;
       color: #6A7178;
       font-size: 14px;
     }
@@ -145,8 +146,12 @@
 }
 
 .Transactions {
-  height: 50vh;
-  overflow: scroll;
+  //flex: auto;
+
+  height: 80%;
+
+  overflow: auto;
+
   padding-bottom: 20px;
   border-bottom: 1px solid #CED4DA;
 

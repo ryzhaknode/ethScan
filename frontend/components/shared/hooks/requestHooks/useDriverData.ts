@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {postData} from "../../../../api/api";
 import {useRouter} from "next/router";
-import {driverType} from "../../../types/driverType";
+import {driverType} from "../../../types/balanceTokenType";
 import useSWR, {mutate} from "swr";
 import {driverFetcher} from "../../../../api/swr/config/fetchers";
 

@@ -1,7 +1,7 @@
 import cls from './DriverItem.module.scss'
 import {classNames} from "../../../shared/lib/classNames";
 import {Box, Typography} from "@mui/material";
-import {driverItem} from "../../../types/driverType";
+import {driverItem} from "../../../types/balanceTokenType";
 import DoneIcon from '@mui/icons-material/Done';
 import {useEffect, useState} from "react";
 import LdsSpinner from "../../../shared/ui/LdsSpinner/LdsSpinner";
