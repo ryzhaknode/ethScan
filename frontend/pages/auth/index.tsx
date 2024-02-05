@@ -3,7 +3,6 @@ import {Box, CircularProgress, Input, makeStyles, Tab, Tabs, Typography} from "@
 import {LoadingButton} from '@mui/lab';
 import React, {ChangeEvent, useEffect, useState} from "react";
 import ReactInputMask from 'react-input-mask';
-import {useCookies} from "react-cookie";
 import ErrorForm from "../../components/pages/AuthPage/additions/ErrorForm/ErrorForm";
 import {classNames} from "../../components/shared/lib/classNames";
 import PasswordInput from "../../components/pages/AuthPage/additions/PasswordInput/PasswordInput";
@@ -12,7 +11,6 @@ import {useRouter} from "next/router";
 import useCountdownTimer from "../../components/shared/hooks/useCountdownTimer";
 import MyLoading from "../../components/shared/ui/MyLoading/MyLoading";
 import {useDispatch, useSelector} from "react-redux";
-import useUserData from "../../components/shared/hooks/requestHooks/useUserData";
 import {getPopupState} from "../../components/app/redux/slices/selectors/openPopupSelectors";
 import {hidePopup, showPopup} from "../../components/app/redux/slices/openPopupSlice";
 import SuccessPopup from "../../components/widgets/SuccessPopup/SuccessPopup";
@@ -42,7 +40,6 @@ const requestPath = {
 
 
 const AuthPage = ({className}: AuthPageProps) => {
-    useUserData()
     // const userData = useSelector(getUserInfo)
     const showModal = useSelector(getPopupState);
     const dispatch = useDispatch();

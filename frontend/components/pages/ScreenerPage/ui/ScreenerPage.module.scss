@@ -1,5 +1,5 @@
 
-.PortfolioPage {
+.ScreenerPage {
   box-sizing: border-box;
   padding-top: 20px;
 
@@ -13,7 +13,6 @@
     padding: 20px;
     height: 100%;
 
-
   }
 }
 
@@ -25,7 +24,7 @@
 
   &__inputBlock {
     display: flex;
-    flex: 0 0 50%;
+    flex: 0 0 20%;
     justify-content: center;
     gap: 6px;
 
@@ -80,30 +79,18 @@
 
   }
 
-  &__calendarBlock {
+  &__selectBtn{
     display: flex;
-    flex-direction: column;
-    flex: 0 0 27.5%;
+    flex: 0 0 45%;
+    //max-width: 800px;
+    justify-content: end;
+    align-items: center;
     gap: 10px;
-    align-items: end;
 
-    &__container {
-      width: 100%;
-      position: relative;
-    }
-
-    &__calendar {
-      transition: all 0.3s ease;
-
-      &:hover {
-        border: 1px solid #FFC404;
-      }
-    }
-
-
-    &__clear {
-      cursor: pointer;
-
+    &__btn{
+      display: flex;
+      max-width: 100px;
+      //flex: 0 0 15%;
     }
   }
 
@@ -126,13 +113,14 @@
 
   &__dataTabs {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     flex: 0 1 75%;
     gap: 10px;
 
 
     &__tab {
-      flex: 1 1 25%;
+      flex: 0 1 15%;
       color: #6A7178;
       font-size: 14px;
     }
@@ -146,7 +134,7 @@
   }
 }
 
-.TokenBalances {
+.Transactions {
   //flex: auto;
 
   height: 80%;

@@ -37,7 +37,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.0",
     "mysql2": "^3.9.1",
-    "nodemailer": "^6.9.8"
+    "nodemailer": "^6.9.8",
+    "web3": "^4.4.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",

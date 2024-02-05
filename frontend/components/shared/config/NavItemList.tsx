@@ -22,4 +22,10 @@ export const navItemList: itemValues[] = [
         url: '/account/ethscan'
     },
 
+    {
+        title: 'Screener',
+        imageSrc:'/images/icons/Drivers.svg',
+        url: '/account/screener'
+    },
+
 ]

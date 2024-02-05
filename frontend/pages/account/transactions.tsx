@@ -16,33 +16,10 @@ const tabTitles: string[] = ['Hash', 'From', 'Asset', 'Value', 'To'];
 
 const TransactionsPage = () => {
     const walletInfo = useSelector(getWalletInfo)
-    // const [invoiceData, fetchInvoiceData] = useInvoiceData();
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-    const [page, setPage] = useState<number>(1);
-    const [filters, setFilters, isFilterActive, checkIsFilterActive] = useNewFilter<filtersInInvoice>({
-        "likeNumber": null,
-        "createdAtFrom": null,
-        "createdAtTo": null,
-    });
-    const [inputFilterByName, setInputFilterByName] = useState<string>("");
-    const [calendarValue, setCalendarValue] = useState("");
     const trottlingHandle = useThrottlingProtect();
     const calendarRef = useRef();
     const isFirstRender = useRef(true);
     const [transactions, setTransactions] = useState<AssetTransfersWithMetadataResult[] | null>(null)
-    const inputByNumberFilter = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.target
-
-        //
-        // console.log(result)
-
-        setInputFilterByName(value)
-
-        trottlingHandle(async () => {
-            const result = await getAllTransfer(value)
-            setTransactions(result)
-        }, 300);
-    };
 
 
     useEffect(() => {
@@ -58,14 +35,6 @@ const TransactionsPage = () => {
 
     }, [walletInfo])
 
-    const setTimeFilter = (from: string | null, to: string | null) => {
-        setFilters(prev => ({
-            ...prev,
-            "createdAtFrom": from,
-            "createdAtTo": from,
-
-        }))
-    };
 
 
     return (
