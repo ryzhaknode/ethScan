@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "test": "jest",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "node_modules/.bin/next dev",
+    "build": "node_modules/.bin/next build",
+    "test": "node_modules/.bin/jest",
+    "start": "node_modules/.bin/next start",
+    "lint": "node_modules/.bin/next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -21,7 +21,7 @@
     "axios": "^1.6.2",
     "ethers": "^6.10.0",
     "mysql2": "^3.9.1",
-    "next": "14.0.3",
+    "next": "^14.1.0",
     "react": "^18",
     "react-cookie": "^6.1.1",
     "react-datepicker": "^4.24.0",
@@ -55,5 +55,7 @@
     "typescript": "^5"
   },
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "git@github.com:ryzhaknode/ethScan.git",
+  "author": "ryzhaknode <denryzhak@gmail.com>"
 }

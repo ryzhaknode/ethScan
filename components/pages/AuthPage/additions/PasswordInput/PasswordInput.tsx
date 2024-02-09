@@ -1,7 +1,7 @@
 import cls from './PasswordInput.module.scss'
 import React, {useEffect, useRef} from "react";
 import {Box, Input, Typography} from "@mui/material";
-import {InputEvent} from "../../../../../pages/auth/index"
+import {InputEvent} from "../../../../../pages/auth"
 import {classNames} from "../../../../shared/lib/classNames";
 
 interface PasswordInputProps {

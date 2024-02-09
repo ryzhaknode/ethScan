@@ -1,0 +1,27 @@
+@import "global";
+@import "animation";
+@import "toZero";
+@import "loader";
+@font-face {
+  font-family: 'e-Ukraine';
+  //src: url('public/fonts/public-Bold.otf') format('otf'),
+  //url('public-Medium.otf') format('otf'),
+  //url('public-Regular.otf') format('otf'),
+  //url('public-Thin.otf') format('otf'),
+  //url('public-UltraLight.otf') format('otf'),
+  //url('public-Light.otf') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family:  'e-Ukraine';
+  box-sizing: border-box;
+  //-webkit-font-smoothing: antialiased;
+  //-moz-osx-font-smoothing: grayscale;
+  background-color: #F5F5F5;
+}
+
+*{
+  //box-sizing: border-box;
+}
+
