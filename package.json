@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve out",
-    "test": "node_modules/.bin/jest",
-    "lint": "node_modules/.bin/next lint"
+    "export": "next export && npx serve out"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
