@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npx serve out",
     "test": "node_modules/.bin/jest",
     "lint": "node_modules/.bin/next lint"
   },
