@@ -1,9 +1,7 @@
-const nextConfig = {
+module.exports = {
     reactStrictMode: true,
     output: 'export',
     images: {
         unoptimized: true,
     },
 };
-
-export default nextConfig;
