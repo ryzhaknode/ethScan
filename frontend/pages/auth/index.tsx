@@ -14,21 +14,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {getPopupState} from "../../components/app/redux/slices/selectors/openPopupSelectors";
 import {hidePopup, showPopup} from "../../components/app/redux/slices/openPopupSlice";
 import SuccessPopup from "../../components/widgets/SuccessPopup/SuccessPopup";
+import {validateInput} from "../../components/shared/function/validateInput/validateInput";
 
 interface AuthPageProps {
     className?: string;
 }
 
 export type InputEvent = ChangeEvent<HTMLInputElement>;
-
-function validateInput(inputValue: string) {
-    const phoneNumberRegex = /^((\+?3)?8)?0\d{9}$/;
-    if (phoneNumberRegex.test(inputValue)) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 const requestPath = {
     getOtp: '/send-password',
@@ -40,10 +32,8 @@ const requestPath = {
 
 
 const AuthPage = ({className}: AuthPageProps) => {
-    // const userData = useSelector(getUserInfo)
     const showModal = useSelector(getPopupState);
     const dispatch = useDispatch();
-
     const router = useRouter();
     const [selectedTab, setSelectedTab] = useState(0)
     const [inputValue, setInputValue] = useState('')
@@ -322,7 +312,6 @@ const AuthPage = ({className}: AuthPageProps) => {
                                 <LoadingButton disabled={isLoading} loading={isLoading}
                                                onClick={handleBtnClick}
                                                variant={inputValue ? "contained" : "text"}
-                                    // onKeyDown={(e) => handleKeyPress(e)}
                                                loadingIndicator={<MyLoading/>}>Війти</LoadingButton>
 
                             </Box>

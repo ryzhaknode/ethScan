@@ -1,7 +1,0 @@
-node_modules
-.next
-.npmrc
-.git
-.gitignore
-npm-debug.log
-yarn-error.log

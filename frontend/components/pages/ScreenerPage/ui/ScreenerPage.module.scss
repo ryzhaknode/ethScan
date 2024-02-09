@@ -70,6 +70,7 @@
     &__img {
       width: 24px;
       height: 24px;
+      cursor: pointer;
 
       &:hover > path {
         transition: all 0.3s ease;

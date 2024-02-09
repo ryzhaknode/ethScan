@@ -1,5 +1,4 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {UserData} from "../../../types/userType";
+import {createSlice} from "@reduxjs/toolkit";
 
 
 export interface openPoppupState {

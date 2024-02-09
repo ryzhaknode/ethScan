@@ -11,6 +11,7 @@ interface TransactionItemProps {
 
 const TransactionItem = ({transaction}: TransactionItemProps) => {
 
+    console.log(transaction)
     const {blockNum} = transaction
     const blockNumDecimal = parseInt(blockNum, 16);
 

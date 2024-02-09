@@ -1,33 +1,33 @@
 import cls from '../../components/pages/TransactionsPage/ui/TransactionsPage.module.scss'
 import {Box, Button, Input, InputAdornment, Typography} from "@mui/material";
 import {useEffect, useRef, useState} from "react";
-import {filtersInInvoice} from "../../components/shared/hooks/requestHooks/useInvoiceData";
-import {useNewFilter} from "../../components/shared/hooks/requestHooks/useNewFilter";
 import {useThrottlingProtect} from "../../components/shared/hooks/useTrottlingProtect";
 import ZeroItems from "../../components/entities/ZeroItems/ui/ZeroItems";
-import {getAllTransfer} from "../../components/shared/config/alchemy/functions/getTransactions";
 import TransactionItem from "../../components/entities/TransactionItem/ui/TransactionItem";
 import {AssetTransfersWithMetadataResult} from "alchemy-sdk";
 import {useSelector} from "react-redux";
 import {getWalletInfo} from "../../components/app/redux/slices/selectors/addWalletInfoSelectors";
+import {getAllTransfer} from "../../components/shared/config/alchemy/functions/getAllTransfer/getAllTransfer";
+import EmptyPage from "../../components/widgets/EmptyPage/ui/EmptyPage";
+import MyLoading from "../../components/shared/ui/MyLoading/MyLoading";
 
 
 const tabTitles: string[] = ['Hash', 'From', 'Asset', 'Value', 'To'];
 
 const TransactionsPage = () => {
     const walletInfo = useSelector(getWalletInfo)
-    const trottlingHandle = useThrottlingProtect();
-    const calendarRef = useRef();
-    const isFirstRender = useRef(true);
     const [transactions, setTransactions] = useState<AssetTransfersWithMetadataResult[] | null>(null)
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
 
         async function getTranscations() {
             if (walletInfo !== null) {
+                setLoading(true)
                 const result = await getAllTransfer(walletInfo)
                 setTransactions(result)
+                setLoading(false)
             }
         }
 
@@ -36,11 +36,10 @@ const TransactionsPage = () => {
     }, [walletInfo])
 
 
-
     return (
-
         <Box className={cls.TransactionsPage}>
             <Box className={cls.TransactionsPage__container}>
+
 
                 <Box className={cls.headerInvoices}>
                     <Box className={cls.headerInvoices__container}>
@@ -55,18 +54,21 @@ const TransactionsPage = () => {
                     </Box>
                 </Box>
 
+                {loading ?
+                    <MyLoading big={true}/>
+                    :
+                    <Box className={cls.Transactions}>
 
-                <Box className={cls.Transactions}>
-
-                    {transactions === null
-                        ?
-                        <ZeroItems/>
-                        :
-                        transactions.map((ts, index) => (
-                            <TransactionItem key={index} transaction={ts}/>
-                        ))
-                    }
-                </Box>
+                        {transactions === null
+                            ?
+                            <EmptyPage>Connect your Wallet</EmptyPage>
+                            :
+                            transactions.map((ts, index) => (
+                                <TransactionItem key={index} transaction={ts}/>
+                            ))
+                        }
+                    </Box>
+                }
             </Box>
         </Box>
 

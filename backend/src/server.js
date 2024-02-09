@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser'
 import csrf from 'csurf'
 import {router} from "../routes/routes.js";
 import mongoose from "mongoose";
-import {connectDB} from "./db.js";
+import {connectDB} from "./mongoDB.js";
 import cors from "cors"
 
 
@@ -13,10 +13,6 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
-
-
-
-// Використовуйте CORS для всіх запитів
 app.use(cors());
 
 connectDB()

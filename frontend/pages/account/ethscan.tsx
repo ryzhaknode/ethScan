@@ -1,101 +1,34 @@
 import cls from '../../components/pages/EthScanPage/ui/EthScanPage.module.scss'
-import {Box, Button, Input, InputAdornment, Typography} from "@mui/material";
-import {useEffect, useRef, useState} from "react";
-import Answer from "../../public/images/icons/Answer.svg"
-import CalendarImg from "../../public/images/icons/Calendar.svg"
-import useInvoiceData, {filtersInInvoice} from "../../components/shared/hooks/requestHooks/useInvoiceData";
-import NavigationLayout from "../../components/widgets/NavigationLayout/ui/NavigationLayout";
-import MyCalendar from "../../components/entities/MyCalendar/ui/MyCalendar";
+import {Box, Input, InputAdornment, Typography} from "@mui/material";
+import {useRef, useState} from "react";
 import {classNames} from "../../components/shared/lib/classNames";
-import {useNewFilter} from "../../components/shared/hooks/requestHooks/useNewFilter";
 import {useThrottlingProtect} from "../../components/shared/hooks/useTrottlingProtect";
 import ZeroItems from "../../components/entities/ZeroItems/ui/ZeroItems";
 import ClearIcon from '@mui/icons-material/Clear';
 import MyLoading from "../../components/shared/ui/MyLoading/MyLoading";
-import EmptyPage from "../../components/widgets/EmptyPage/ui/EmptyPage";
-import {getAllTransfer} from "../../components/shared/config/alchemy/functions/getTransactions";
 import TransactionItem from "../../components/entities/TransactionItem/ui/TransactionItem";
 import {AssetTransfersWithMetadataResult} from "alchemy-sdk";
+import {getAllTransfer} from "../../components/shared/config/alchemy/functions/getAllTransfer/getAllTransfer";
 
 
 const tabTitles: string[] = ['Hash', 'From', 'Asset', 'Value', 'To'];
 
 const TransactionsPage = () => {
-    // const [invoiceData, fetchInvoiceData] = useInvoiceData();
-    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-    const [page, setPage] = useState<number>(1);
-    const [filters, setFilters, isFilterActive, checkIsFilterActive] = useNewFilter<filtersInInvoice>({
-        "likeNumber": null,
-        "createdAtFrom": null,
-        "createdAtTo": null,
-    });
     const [inputFilterByName, setInputFilterByName] = useState<string>("");
-    const [calendarValue, setCalendarValue] = useState("");
     const trottlingHandle = useThrottlingProtect();
-    const calendarRef = useRef();
-    const isFirstRender = useRef(true);
     const [transactions, setTransactions] = useState<AssetTransfersWithMetadataResult[] | null>(null)
+    const [loading, setLoading] = useState(false)
     const inputByNumberFilter = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const {value} = e.target
-
-        //
-        // console.log(result)
-
-        setInputFilterByName(value)
-
+        setInputFilterByName(value);
         trottlingHandle(async () => {
+            setLoading(true)
             const result = await getAllTransfer(value)
             setTransactions(result)
+            setLoading(false)
         }, 300);
     };
 
-
-    useEffect(() => {
-        console.log(transactions)
-    }, [transactions])
-
-    const setTimeFilter = (from: string | null, to: string | null) => {
-        setFilters(prev => ({
-            ...prev,
-            "createdAtFrom": from,
-            "createdAtTo": from,
-
-        }))
-    };
-
-
-    const handleClearCalendarValue = () => {
-        setCalendarValue('')
-
-    };
-    const handleSetCalendarValue = (from: string, to: string) => {
-        setCalendarValue(`${from} - ${to}`)
-
-    };
-
-
-    const handleCalendarClick = () => {
-        setIsCalendarOpen(prevState => !prevState)
-    };
-
-    const closeCalendar = () => {
-        setIsCalendarOpen(false)
-
-    };
-
-    const handleClearFilter = () => {
-        setFilters({
-            "likeNumber": null,
-            "createdAtFrom": null,
-            "createdAtTo": null,
-        })
-        setPage(1)
-        setInputFilterByName("")
-        //clear calendar
-        // @ts-ignore
-        calendarRef.current?.clearCalendar()
-
-    };
 
     const handleClearInput = () => {
         setInputFilterByName('')
@@ -103,26 +36,12 @@ const TransactionsPage = () => {
     };
 
 
-    useEffect(() => {
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
-            return;
-        }
-
-        fetchInvoiceFilters()
-
-        async function fetchInvoiceFilters() {
-            // await fetchInvoiceData(page, filters)
-            checkIsFilterActive()
-        }
-    }, [filters, page]);
-
-
     return (
 
         <Box className={cls.EthScanPage}>
             <Box className={cls.EthScanPage__container}>
-                {/*Пошук та дава створення*/}
+
+
                 <Box className={cls.searchBlock}>
                     <Box className={cls.searchBlock__inputBlock}>
                         <Input disableUnderline={true} fullWidth={true}
@@ -141,52 +60,19 @@ const TransactionsPage = () => {
                                }
                         />
                         <Box className={cls.searchBlock__inputBlock__answer}>
-                            {/*<Answer className={cls.searchBlock__inputBlock__img}/>*/}
+
                             <img className={cls.searchBlock__inputBlock__img} src={'/images/icons/Answer.svg'}/>
                             <Box className={cls.searchBlock__inputBlock__answerBlock}>
                                 <Box padding='14px'>
-                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>Вкажіть
-                                        номер у встановленому
-                                        форматі:</Typography>
-                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>1.
-                                        УНТК-ДТ-00001776</Typography>
-                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>2.
-                                        УНТК-ТД-ТД00-003143</Typography>
-                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'
-                                                paddingTop='10px'>Усі літери великі та
-                                        кирилицею.</Typography>
-
+                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>Set up wallet address</Typography>
+                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>and you will receive information</Typography>
+                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>about all Ethereum transactions.</Typography>
                                 </Box>
                             </Box>
                         </Box>
                     </Box>
-                    <Box className={cls.searchBlock__calendarBlock}>
-                        <Box className={cls.searchBlock__calendarBlock__container}>
-                            <Input onClick={handleCalendarClick} value={calendarValue}
-                                   disableUnderline={true} fullWidth={true} placeholder='Дата створення'
-                                   className={classNames(cls.searchBlock__calendarBlock__calendar, {open_inputCalendar: isCalendarOpen})}
-                                   endAdornment={
-                                       <InputAdornment sx={{padding: '12px'}} position="end">
-                                           <img src={'/images/icons/Calendar.svg'}/>
-                                       </InputAdornment>
-
-                                   }/>
-                            <MyCalendar ref={calendarRef} closeCalendar={closeCalendar}
-                                        isOpen={isCalendarOpen}
-                                        setFilter={setTimeFilter} setTime={handleSetCalendarValue}
-                                        clearTime={handleClearCalendarValue}/>
-                        </Box>
-
-                        <Typography variant='h5' fontSize='14px' color='#ADB5BD'
-                                    className={cls.searchBlock__calendarBlock__clear}
-                                    onClick={handleClearFilter}
-                        >
-                            Очистити фільтр
-                        </Typography>
-                    </Box>
                 </Box>
 
-                {/*Заголовки накладної*/}
                 <Box className={cls.headerInvoices}>
                     <Box className={cls.headerInvoices__container}>
                         <Box className={cls.headerInvoices__dataTabs}>
@@ -200,24 +86,22 @@ const TransactionsPage = () => {
                     </Box>
                 </Box>
 
-                {/*Накладна*/}
-                <Box className={cls.Transactions}>
+                {loading ?
+                    <MyLoading big={true}/>
+                    :
 
-                    {transactions === null
-                        ?
-                        <ZeroItems/>
-                        :
-                        transactions.map((ts, index) => (
-                            <TransactionItem key={index} transaction={ts}/>
-                        ))
-                    }
+                    <Box className={cls.Transactions}>
 
-                    {/*<BalanceItem transaction={transactions}/>*/}
-
-                    {/*{transactions?.map((ts, index) => (*/}
-                    {/*    <BalanceItem key={index} transaction={ts}/>*/}
-                    {/*))}*/}
-                </Box>
+                        {transactions === null
+                            ?
+                            <ZeroItems/>
+                            :
+                            transactions.map((ts, index) => (
+                                <TransactionItem key={index} transaction={ts}/>
+                            ))
+                        }
+                    </Box>
+                }
             </Box>
         </Box>
 

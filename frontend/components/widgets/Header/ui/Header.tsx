@@ -17,7 +17,7 @@ import {getWalletInfo} from "../../../app/redux/slices/selectors/addWalletInfoSe
 import useClickOutside from "../../../shared/hooks/useClickOutside";
 import {alchemy} from "../../../shared/config/alchemy";
 import Link from "next/link";
-import {getLastTransfer} from "../../../shared/config/alchemy/functions/getTransactions";
+import {getLastTransfer} from "../../../shared/config/alchemy/functions/getLastTransfer/getTransactions";
 
 interface HeaderProps {
     className?: string;

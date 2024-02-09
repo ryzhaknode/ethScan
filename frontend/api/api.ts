@@ -19,22 +19,6 @@ export const getData = async (url: string) => {
 };
 
 
-const cors = 'https://cors-anywhere.herokuapp.com/'
-export const getYogaData = async (url: string) => {
-    try {
-        const response = await axios.get(`${url}`, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        return response;
-
-    } catch (error) {
-        console.error("Error:", error);
-        return error;
-    }
-};
 
 export const postData = async (url:string, post:object, formData = false) => {
     try {
@@ -97,5 +81,5 @@ export const deleteData = async (url: string, post: object) => {
     }
 };
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 // axios.defaults.withXSRFToken = true;

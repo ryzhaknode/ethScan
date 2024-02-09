@@ -7,27 +7,27 @@ import {getWalletInfo} from "../../components/app/redux/slices/selectors/addWall
 import {alchemy} from "../../components/shared/config/alchemy";
 import {BalanceTokenType} from "../../components/types/balanceTokenType";
 import BalanceItem from "../../components/entities/BalanceItem/ui/BalanceItem";
+import EmptyPage from "../../components/widgets/EmptyPage/ui/EmptyPage";
+import MyLoading from "../../components/shared/ui/MyLoading/MyLoading";
 
 
-const tabTitles: string[] = [ 'Name', 'Balance', 'Symbol'];
+const tabTitles: string[] = ['Name', 'Balance', 'Symbol'];
 
 const PortfolioPage = () => {
     const walletInfo = useSelector(getWalletInfo)
     const [tokenBalances, setTokenBalances] = useState<Array<BalanceTokenType> | null>(null)
-
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
 
         async function getTokenBalances() {
             if (walletInfo !== null) {
+                setLoading(true)
                 const balances = await alchemy.core.getTokenBalances(walletInfo);
 
                 const nonZeroBalances = balances.tokenBalances.filter((token) => {
                     return token.tokenBalance !== "0";
                 });
-
-
-                let i = 1;
 
                 const promises = nonZeroBalances.map(async (token, index) => {
                     let balance: string | null | number = token.tokenBalance;
@@ -44,13 +44,16 @@ const PortfolioPage = () => {
                 });
 
                 const results = await Promise.all(promises);
-                console.log(results);
 
                 if (results !== null) {
                     // const sortedFromStart = results.sort((a, b) => a.number - b.number)
                     const tokenWithNoZeroBalance = results.filter(tokenBalance => tokenBalance.balance > 0.01)
                     setTokenBalances(tokenWithNoZeroBalance)
+                    setLoading(false)
+                    return
                 }
+
+                setLoading(false)
             }
         }
 
@@ -77,22 +80,30 @@ const PortfolioPage = () => {
                     </Box>
                 </Box>
 
+                {loading ?
+                    <MyLoading big={true}/>
+                    :
 
-                <Box className={cls.TokenBalances}>
+                    <Box className={cls.TokenBalances}>
 
-                    {tokenBalances === null
-                        ?
-                        <ZeroItems/>
-                        :
-                        tokenBalances.map((tokenBalance, index) => (
-                            <BalanceItem key={index} balanceToken={tokenBalance}/>
-                        ))
-                    }
-                </Box>
+                        {tokenBalances === null
+                            ?
+
+                            <EmptyPage>Connect your Wallet</EmptyPage>
+                            :
+                            tokenBalances.map((tokenBalance, index) => (
+                                <BalanceItem key={index} balanceToken={tokenBalance}/>
+                            ))
+
+                        }
+                    </Box>
+
+                }
             </Box>
         </Box>
 
-    );
+    )
+        ;
 };
 
 export default PortfolioPage;

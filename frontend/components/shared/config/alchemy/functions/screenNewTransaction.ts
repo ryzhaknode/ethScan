@@ -75,7 +75,7 @@ const usdtTransferFilter = {
     ],
 };
 
-export async function checkForNewTransfers(tokenAddress:string, limitValue = 100000) {
+export async function checkForNewTransfers(tokenAddress:string, limitValue = 10000) {
     let transferInfo: any;
     try {
         const logs = await web3.eth.getPastLogs({

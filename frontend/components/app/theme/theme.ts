@@ -1,5 +1,4 @@
 import {createTheme} from "@mui/material";
-import {node} from "prop-types";
 import type {} from '@mui/lab/themeAugmentation';
 
 export const theme = createTheme({

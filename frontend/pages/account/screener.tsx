@@ -6,11 +6,10 @@ import {useThrottlingProtect} from "../../components/shared/hooks/useTrottlingPr
 import ZeroItems from "../../components/entities/ZeroItems/ui/ZeroItems";
 import ClearIcon from '@mui/icons-material/Clear';
 import MyLoading from "../../components/shared/ui/MyLoading/MyLoading";
-import EmptyPage from "../../components/widgets/EmptyPage/ui/EmptyPage";
 import {checkForNewTransfers, tokenAdress} from "../../components/shared/config/alchemy/functions/screenNewTransaction";
 import ScreenerTransactionItem from "../../components/entities/ScreenerTransactionItem/ui/ScreenerTransactionItem";
 
-const tabTitles: string[] = ['From', 'Value',  'Asset', 'To', 'Hash'];
+const tabTitles: string[] = ['From', 'Value', 'Asset', 'To', 'Hash'];
 
 
 export type transferType = {
@@ -23,33 +22,35 @@ export type transferType = {
 
 
 const ScreenerPage = () => {
-    const [inputFilterByName, setInputFilterByName] = useState<string>("");
-    const trottlingHandle = useThrottlingProtect();
+    const [inputValueByName, setInputValueByName] = useState<string>("");
     const [selectedButton, setSelectedButton] = useState("")
     const intervalRef = useRef<any>(null)
     const [transfers, setTransfers] = useState<Array<transferType>>([]);
-    const inputByNumberFilter = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.target
+    const [loading, setLoading] = useState(false)
 
-        setInputFilterByName(value)
+
+    const inputByNumberFilter = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        setSelectedButton("")
+        clearTransactions()
+
+        const {value} = e.target
+        const filteredValue = value.replace(/[^\d]/g, '');
+        setInputValueByName(filteredValue);
 
     };
-
 
 
     const handleSelectBtn = async (event: React.MouseEvent<HTMLButtonElement>) => {
         const {name} = event.target as HTMLButtonElement;
         setSelectedButton(name)
 
-        setTransfers([])
-
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current)
-        }
+        clearTransactions()
 
         if (tokenAdress[name as keyof typeof tokenAdress]) {
             intervalRef.current = setInterval(async () => {
-                const newTransaction: transferType = await checkForNewTransfers(tokenAdress[name as keyof typeof tokenAdress])
+                setLoading(true)
+                const newTransaction: transferType = await checkForNewTransfers(tokenAdress[name as keyof typeof tokenAdress], Number(inputValueByName))
 
                 if (newTransaction) {
                     setTransfers(prevTransfers => {
@@ -61,8 +62,9 @@ const ScreenerPage = () => {
 
                         return [...prevTransfers, newTransaction];
                     });
+                    setLoading(false)
                 }
-                console.log(newTransaction)
+                setLoading(false)
             }, 5000)
 
         }
@@ -70,24 +72,37 @@ const ScreenerPage = () => {
 
     }
 
+    function clearTransactions() {
+        setTransfers([])
+
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current)
+        }
+    }
+
+
+    function clearInputValue() {
+        setInputValueByName("")
+        setSelectedButton("")
+        clearTransactions()
+    }
 
 
     return (
 
         <Box className={cls.ScreenerPage}>
             <Box className={cls.ScreenerPage__container}>
-                {/*Пошук та дава створення*/}
                 <Box className={cls.searchBlock}>
                     <Box className={cls.searchBlock__inputBlock}>
                         <Input disableUnderline={true} fullWidth={true}
-                               className={classNames(cls.searchBlock__inputBlock__input, {active_input: inputFilterByName})}
+                               className={classNames(cls.searchBlock__inputBlock__input, {active_input: inputValueByName})}
                                onChange={inputByNumberFilter}
-                               value={inputFilterByName}
-                               placeholder='Input value'
+                               value={inputValueByName}
+                               placeholder='default value is 10000'
                                endAdornment={
-                                   inputFilterByName && <InputAdornment
-                                       // onClick={handleClearInput}
-                                       sx={{padding: '12px'}}
+                                   inputValueByName && <InputAdornment
+                                       onClick={clearInputValue}
+                                       sx={{padding: '12px', cursor: 'pointer'}}
                                        position="end">
                                        <ClearIcon/>
                                    </InputAdornment>
@@ -95,26 +110,24 @@ const ScreenerPage = () => {
                                }
                         />
                         <Box className={cls.searchBlock__inputBlock__answer}>
-                            {/*<Answer className={cls.searchBlock__inputBlock__img}/>*/}
                             <img className={cls.searchBlock__inputBlock__img} src={'/images/icons/Answer.svg'}/>
                             <Box className={cls.searchBlock__inputBlock__answerBlock}>
                                 <Box padding='14px'>
-                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>Вкажіть
-                                        номер у встановленому
-                                        форматі:</Typography>
-                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>1.
-                                        УНТК-ДТ-00001776</Typography>
-                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>2.
-                                        УНТК-ТД-ТД00-003143</Typography>
+                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>1 - Set a minimum
+                                        value</Typography>
                                     <Typography variant='body2' lineHeight='12px' fontSize='10px'
-                                                paddingTop='10px'>Усі літери великі та
-                                        кирилицею.</Typography>
+                                                paddingBottom={'10px'}>2 - Select the token you want to
+                                        track</Typography>
+                                    <Typography variant='body2' lineHeight='12px' fontSize='10px'>and you will receive
+                                        new transactions from the Ethereum blockchain for the selected
+                                        token.</Typography>
 
                                 </Box>
                             </Box>
                         </Box>
                     </Box>
 
+                    {loading && <MyLoading/>}
                     <Box className={cls.searchBlock__selectBtn}>
                         <Button className={cls.searchBlock__selectBtn__btn}
                                 name='usdt'

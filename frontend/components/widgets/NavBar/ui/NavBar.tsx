@@ -1,11 +1,9 @@
 import cls from './NavBar.module.scss';
 import {Box} from "@mui/material";
-// import NavItem from "../../../entities/NavItem/ui/NavItem";
 import {classNames} from "../../../shared/lib/classNames";
-// import {navItemList} from "../../../shared/config/NavItemList";
-import {useState} from "react";
 import NavItem from "../../../entities/NavItem/ui/NavItem";
 import {navItemList} from "../../../shared/config/NavItemList";
+import Image from "next/image";
 
 
 interface NavBarProps {
@@ -13,11 +11,11 @@ interface NavBarProps {
 }
 
 const NavBar = ({className}: NavBarProps) => {
-    const [activeBar, setActiveBar ] = useState(null)
+
     return (
         <Box className={classNames(cls.NavBar, {}, [className])}>
             <Box className={cls.Logo}>
-                <img className={cls.Logo__img} style={{filter: 'invert(100%)'}} src='/images/untk_logo.svg'
+                <Image className={cls.Logo__img} width={60} height={60} src='/images/logoEth.png'
                      alt={'logo'}/>
             </Box>
             <Box className={cls.Nav}>
