@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx serve out",
-    "export": "next build && next export"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
