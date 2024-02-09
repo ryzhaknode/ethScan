@@ -76,7 +76,7 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Build and Serve HTML with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next start
+        run: ${{ steps.detect-package-manager.outputs.runner }} npx serve out
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
