@@ -5,7 +5,7 @@ export default function Document() {
         <Html>
             <Head>
                 <script src="https://unpkg.com/imask" async></script>
-                <link rel="icon" href="/images/favicon/untk32.png" />
+                <link rel="icon" href="/images/logoEth.png" />
             </Head>
             <body className='bd-home'>
             <Main/>

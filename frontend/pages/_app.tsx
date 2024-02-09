@@ -11,7 +11,6 @@ import {store} from "../components/app/redux/store/store";
 
 
 export default function App({Component, pageProps}: AppProps) {
-    const [cookies] = useCookies();
     const router = useRouter();
     const isAccount = router.pathname.includes('/account');
 

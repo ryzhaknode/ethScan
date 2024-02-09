@@ -1,7 +1,6 @@
 import Head from "next/head";
 
 const NotFoundPage = () => {
-    // const { translations } = useContext(TranslationsContext);
 
     return (
         <>

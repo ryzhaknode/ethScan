@@ -1,8 +1,7 @@
 import cls from '../../components/pages/ScreenerPage/ui/ScreenerPage.module.scss'
 import {Box, Button, Input, InputAdornment, Typography} from "@mui/material";
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import {classNames} from "../../components/shared/lib/classNames";
-import {useThrottlingProtect} from "../../components/shared/hooks/useTrottlingProtect";
 import ZeroItems from "../../components/entities/ZeroItems/ui/ZeroItems";
 import ClearIcon from '@mui/icons-material/Clear';
 import MyLoading from "../../components/shared/ui/MyLoading/MyLoading";
@@ -16,7 +15,6 @@ export type transferType = {
     sender: string,
     recipient: string,
     amount: number,
-    // tokenName: string,
     transactionHash: string,
 }
 
