@@ -27,6 +27,6 @@ Open [https://eth-scan-ryzhaknodes-projects.vercel.app/account) with your browse
 ## Additional Information:
 
 - In addition to the frontend functionalities, I've also implemented a backend for authentication using Node.js and MongoDB as the database in this project. However, please note that this backend stage is still in the development and conceptualization phase. I am actively working on introducing more exciting features and enhancing the backend functionalities.
-
+[https://eth-scan-ryzhaknodes-projects.vercel.app/auth)
 Thank you for your attention and stay tuned for further updates! If you have any suggestions or ideas, feel free to contribute or share your thoughts. Your feedback is highly appreciated.
 
